@@ -17,7 +17,7 @@ const Page = () => {
     <div className={classes.inner}>
       <div className={classes.content}>
         <Title className={classes.title}>
-          A <span className={classes.highlight}>modern</span> task planner.
+          A <span className={classes.highlight}>modern</span> task organizer.
         </Title>
         <Text c="dimmed" mt="md">
           Solve your tasks 5x faster - right planning reveals solutions.

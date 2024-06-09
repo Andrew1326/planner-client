@@ -2,34 +2,35 @@
 
 import {useForm} from "@mantine/form";
 import {Button, PasswordInput, Stack, TextInput} from "@mantine/core";
+import useAuthStore from '@/app/auth/_store/authStore';
 
-interface ILoginFormValues {
-    nameOrEmail: string;
+export interface ILoginFormValues {
+    email: string;
     password: string;
 }
 
 const LoginForm = () => {
+  const { login } = useAuthStore.getState();
+
     const form = useForm<ILoginFormValues>({
         mode: 'uncontrolled',
         initialValues: {
-            nameOrEmail: '',
+            email: '',
             password: ''
         },
     });
 
     // form submit
-    const handleSubmit = (values: ILoginFormValues): void => {
-        console.log(values)
-    }
+    const handleSubmit = (values: ILoginFormValues) => login(values);
 
     return <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack gap={'md'}>
             <TextInput
                 size={'md'}
-                label="Name or email"
-                placeholder="Enter your name or email address"
-                key={form.key('nameOrEmail')}
-                {...form.getInputProps('nameOrEmail')}
+                label="Email"
+                placeholder="Enter your email address"
+                key={form.key('email')}
+                {...form.getInputProps('email')}
             />
             <PasswordInput
                 size={'md'}

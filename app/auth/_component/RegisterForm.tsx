@@ -2,8 +2,9 @@
 
 import {isEmail, matches, useForm} from "@mantine/form";
 import {Button, PasswordInput, Stack, TextInput} from "@mantine/core";
+import useAuthStore from '@/app/auth/_store/authStore';
 
-interface IRegisterFormValues {
+export interface IRegisterFormValues {
     name: string;
     email: string;
     password: string;
@@ -11,6 +12,8 @@ interface IRegisterFormValues {
 }
 
 const RegisterForm = () => {
+  const { register } = useAuthStore.getState();
+
     const form = useForm<IRegisterFormValues>({
         mode: 'uncontrolled',
         initialValues: {
@@ -31,9 +34,7 @@ const RegisterForm = () => {
     });
 
     // form submit
-    const handleSubmit = (values: IRegisterFormValues): void => {
-        console.log(values)
-    }
+    const handleSubmit = (values: IRegisterFormValues) => register(values)
 
     return <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack gap={'md'}>
