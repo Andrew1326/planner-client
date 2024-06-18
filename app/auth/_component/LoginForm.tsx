@@ -23,7 +23,7 @@ const LoginForm = () => {
   });
 
   // form submit
-  const handleSubmit = async (values: ILoginFormValues): Promise<void> => {
+  const handleSubmit = async (values: ILoginFormValues) => {
     // login user
     await login(values);
 

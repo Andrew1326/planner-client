@@ -11,7 +11,7 @@ const Page = () => {
     projectGetByCurrentUser();
   }, []);
 
-  return null;
+  return <h1>HERE</h1>;
 };
 
 export default Page;

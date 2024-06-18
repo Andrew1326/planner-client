@@ -38,6 +38,8 @@ const userProjectStore = create<IProjectStore>((set) => ({
           lset(state, 'error.projectGetByCurrentUser', projectGetRes),
         ),
       );
+
+      return;
     }
 
     // define projects

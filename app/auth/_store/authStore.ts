@@ -28,7 +28,7 @@ type TRegisterData = Omit<IRegisterFormValues, 'passwordRepeat'>;
 
 const useAuthStore = create(
   persist<IAuthStore>(
-    (set) => ({
+    (set, get) => ({
       loading: {},
       error: {},
       authToken: null,
@@ -62,12 +62,22 @@ const useAuthStore = create(
         const data = omit(userData, ['passwordRepeat']) as TRegisterData;
 
         // send request to create user
-        await sendRequest<TRegisterData, string>({
+        const userCreateRes = await sendRequest<TRegisterData, string>({
           path: '/user',
           method: 'POST',
           data,
           parser: 'json',
         });
+
+        // save error if user wasn't created successfully
+        if (userCreateRes.fail) {
+          set(produce((state) => lset(state, 'error.register', userCreateRes)));
+
+          return;
+        }
+
+        // login user
+        await get().login(data);
       },
 
       // method for receiving user info
@@ -84,6 +94,8 @@ const useAuthStore = create(
           set(
             produce((state) => lset(state, 'error.userGetInfo', userInfoRes)),
           );
+
+          return;
         }
 
         // define user
