@@ -12,9 +12,10 @@ export interface IRegisterFormValues {
   passwordRepeat: string;
 }
 
+const { register, userGetInfo } = useAuthStore.getState();
+
 const RegisterForm = () => {
   const router = useRouter();
-  const { register, userGetInfo } = useAuthStore.getState();
 
   const form = useForm<IRegisterFormValues>({
     mode: 'uncontrolled',

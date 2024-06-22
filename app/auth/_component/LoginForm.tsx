@@ -10,9 +10,10 @@ export interface ILoginFormValues {
   password: string;
 }
 
+const { login, userGetInfo } = useAuthStore.getState();
+
 const LoginForm = () => {
   const router = useRouter();
-  const { login, userGetInfo } = useAuthStore.getState();
 
   const form = useForm<ILoginFormValues>({
     mode: 'uncontrolled',

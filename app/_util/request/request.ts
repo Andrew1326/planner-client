@@ -25,7 +25,7 @@ interface IPatchRequestPayload<TData> {
 
 interface IDeleteRequestPayload<TData> {
   method: 'DELETE';
-  data: TData;
+  data?: TData;
   parser: TResponseParser;
 }
 
